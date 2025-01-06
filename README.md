@@ -6,11 +6,9 @@ The entire implementation is provided in one single header file, making it extre
 
 **Features**
 
-- Single-Header: Just include and use—no builds or installations needed.
-- Lightweight: Optimized for fast and efficient task management.
-- Modern C++: Built with C++11 and above for a clean design.
-- Scalable: Dynamically manages tasks and threads for concurrency.
-- Easy to Use: Intuitive API for seamless integration.
+* Lightweight: Just include and use—no builds or installations needed.
+* Portable: Built with C++11, adapted with Linux and other platforms.
+* Easy to Use: Intuitive API for seamless integration.
 
 **References**
 
