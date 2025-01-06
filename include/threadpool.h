@@ -36,12 +36,20 @@ public:
     ~ThreadPool();
 
     template <class F, class... Args>
-    void enqueue(int priority, F&& f, Args&&... args)
+    std::future<typename std::result_of<F(Args...)>::type> enqueue(int priority, F&& f, Args&&... args)
     {
+        using return_type = typename std::result_of<F(Args...)>::type;
+
+        auto packaged_func = std::make_shared<std::packaged_task<return_type()>>(
+            std::bind(std::forward<F>(f), std::forward<Args>(args)...)
+        );
+
+        std::future<return_type> res = packaged_func->get_future();
+
         Task t = Task{
             .timestamp = std::chrono::steady_clock::now(),
             .priority = priority,
-            std::bind(std::forward<F>(f), std::forward<Args>(args)...)
+            .func = [packaged_func]() { (*packaged_func)(); }
         };
 
         {
@@ -50,6 +58,8 @@ public:
         }
 
         m_condition.notify_one();
+
+        return res;
     }
 
 private:
