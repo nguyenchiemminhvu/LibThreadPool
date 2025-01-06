@@ -3,7 +3,7 @@
 The ThreadPool library is a simple and efficient way to manage multiple tasks in a program. It allows you to run several tasks at the same time using a pool of worker threads. This can help improve the performance of your program, especially when dealing with many tasks that can be executed concurrently.
 
 **Requirements**
-- A C++17 compatible compiler (e.g., GCC 7.1+, Clang 5.0+, MSVC 2017+)
+- A C++11 compatible compiler (e.g., GCC 7.1+, Clang 5.0+, MSVC 2017+)
 - CMake 3.10 or higher
 
 **To build and install the ThreadPool library, follow these steps:**
