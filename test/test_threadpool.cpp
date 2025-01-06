@@ -1,11 +1,15 @@
 #include "threadpool.h"
+#include <unistd.h>
 #include <iostream>
+#include <thread>
+#include <future>
 
 using namespace std::chrono_literals;
 
 int main()
 {
     ThreadPool pool(4);
+
     for (int i = 0; i < 10; i++)
     {
         pool.enqueue(i, [i](int val) {
@@ -14,5 +18,11 @@ int main()
             std::cout << i << " end" << std::endl;
         }, i);
     }
+
+    while (true)
+    {
+        pause();
+    }
+
     return 0;
 }
