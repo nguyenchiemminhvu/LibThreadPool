@@ -3,8 +3,9 @@
 #include <iostream>
 #include <thread>
 #include <future>
+#include <chrono>
 
-using namespace std::chrono_literals;
+using namespace std::chrono;
 
 int main()
 {
@@ -14,7 +15,7 @@ int main()
     {
         pool.enqueue(0, [i](int val) {
             std::cout << i << " start" << std::endl;
-            std::this_thread::sleep_for(2000ms);
+            std::this_thread::sleep_for(std::chrono::milliseconds(2000));
             std::cout << i << " end" << std::endl;
         }, i);
     }
@@ -25,7 +26,7 @@ int main()
         std::promise<int> pr;
         std::future<int> fu = pr.get_future();
         pool.enqueue(0, [i](std::promise<int>& pr) {
-            std::this_thread::sleep_for(100ms);
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
             pr.set_value(i);
         }, std::ref(pr));
 
