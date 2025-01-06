@@ -11,25 +11,26 @@
 #include <condition_variable>
 #include <atomic>
 
-struct Task
-{
-    std::chrono::steady_clock::time_point timestamp;
-    int priority;
-    std::function<void()> func;
-
-    bool operator<(const Task& other) const
-    {
-        if (timestamp == other.timestamp)
-        {
-            return priority < other.priority;
-        }
-
-        return timestamp > other.timestamp;
-    }
-};
-
 class ThreadPool
 {
+public:
+    struct Task
+    {
+        std::chrono::steady_clock::time_point timestamp;
+        int priority;
+        std::function<void()> func;
+
+        bool operator<(const Task& other) const
+        {
+            if (timestamp == other.timestamp)
+            {
+                return priority < other.priority;
+            }
+
+            return timestamp > other.timestamp;
+        }
+    };
+
 public:
     explicit ThreadPool(std::size_t num_threads);
     ~ThreadPool();
