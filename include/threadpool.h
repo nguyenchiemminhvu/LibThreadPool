@@ -32,7 +32,7 @@ public:
     };
 
 public:
-    explicit ThreadPool(std::size_t num_threads);
+    explicit ThreadPool(std::size_t num_threads = std::thread::hardware_concurrency());
     ~ThreadPool();
 
     template <class F, class... Args>
