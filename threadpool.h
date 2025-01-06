@@ -85,7 +85,7 @@ public:
 private:
     void worker_thread_func()
     {
-        while (true)
+        while (m_running)
         {
             Task t;
             {
