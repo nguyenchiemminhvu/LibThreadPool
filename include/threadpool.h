@@ -38,9 +38,8 @@ public:
     template <class F, class... Args>
     void enqueue(int priority, F&& f, Args&&... args)
     {
-        auto timestamp = std::chrono::steady_clock::now();
         Task t = Task{
-            .timestamp = timestamp,
+            .timestamp = std::chrono::steady_clock::now(),
             .priority = priority,
             std::bind(std::forward<F>(f), std::forward<Args>(args)...)
         };
