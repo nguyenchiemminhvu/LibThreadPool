@@ -23,11 +23,10 @@ public:
 
         bool operator<(const Task& other) const
         {
-            if (timestamp == other.timestamp)
-            {
-                return priority < other.priority;
-            }
-
+            if (priority < other.priority)
+                return true;
+            if (priority > other.priority)
+                return false;
             return timestamp > other.timestamp;
         }
     };
