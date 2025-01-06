@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wextra
 TARGET = test_threadpool
-SRCS = test_threadpool.cpp threadpool.cpp
+SRCS = test_threadpool.cpp
 HEADERS = threadpool.h
 
 all: $(TARGET)

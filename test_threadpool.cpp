@@ -26,7 +26,7 @@ int main()
         std::promise<int> pr;
         std::future<int> fu = pr.get_future();
         pool.enqueue(0, [i](std::promise<int>& pr) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            std::this_thread::sleep_for(std::chrono::milliseconds(222));
             pr.set_value(i);
         }, std::ref(pr));
 
@@ -40,6 +40,13 @@ int main()
         std::cout << val << " ";
     }
     std::cout << std::endl;
+
+    auto fu = pool.enqueue(0, []() -> int {
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+        return 100;
+    });
+
+    std::cout << "Result returned by direct future assignment: " << fu.get() << std::endl;
 
     while (true)
     {
