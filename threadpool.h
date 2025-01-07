@@ -1,3 +1,53 @@
+/**
+ * ThreadPool.h
+ *
+ * Copyright © [nguyenchiemminhvu] [2025]. All Rights Reserved.
+ *
+ * Licensed under the MIT License. You may obtain a copy of the License at:
+ * https://opensource.org/licenses/MIT
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * Description:
+ * This header file defines a thread pool implementation in C++ that supports
+ * task prioritization. Tasks with higher priority are executed first, and
+ * tasks with the same priority are executed in the order they were submitted.
+ *
+ * Usage:
+ * - Include this file in your C++ project to use the thread pool.
+ * - Use `InitializeThreadPool(n)` to initialize the thread pool with `n` threads.
+ * - Use `GetThreadPool()->enqueue(priority, func, args...)` to add tasks to the pool.
+ *
+ * Notes:
+ * - This implementation uses a singleton pattern for the thread pool.
+ * - Thread pool tasks are managed via a priority queue, where tasks with higher
+ *   priority (lower integer value) are processed first.
+ * - This implementation is thread-safe and uses `std::mutex` and
+ *   `std::condition_variable` for synchronization.
+ *
+ * Author:
+ * [nguyenchiemminhvu@gmail.com]
+ *
+ * Version:
+ * 1.0 - [20250107]
+ */
+
 #ifndef THREAD_POOL_H
 #define THREAD_POOL_H
 
