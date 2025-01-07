@@ -7,7 +7,7 @@ HEADERS = threadpool.h
 all: $(TARGET)
 
 $(TARGET): $(SRCS) $(HEADERS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(SRCS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(SRCS) -lpthread
 
 clean:
 	rm -f $(TARGET)
