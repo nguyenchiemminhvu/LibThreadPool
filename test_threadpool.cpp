@@ -9,11 +9,11 @@ using namespace std::chrono;
 
 int main()
 {
-    ThreadPool pool(4);
+    InitializeThreadPool(4);
 
     for (int i = 0; i < 10; i++)
     {
-        pool.enqueue(0, [i](int val) {
+        GetThreadPool()->enqueue(0, [i](int val) {
             std::cout << i << " start" << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(2000));
             std::cout << i << " end" << std::endl;
@@ -25,7 +25,7 @@ int main()
     {
         std::promise<int> pr;
         std::future<int> fu = pr.get_future();
-        pool.enqueue(0, [i](std::promise<int>& pr) {
+        GetThreadPool()->enqueue(0, [i](std::promise<int>& pr) {
             std::this_thread::sleep_for(std::chrono::milliseconds(222));
             pr.set_value(i);
         }, std::ref(pr));
@@ -41,7 +41,7 @@ int main()
     }
     std::cout << std::endl;
 
-    auto fu = pool.enqueue(0, []() -> int {
+    auto fu = GetThreadPool()->enqueue(0, []() -> int {
         std::this_thread::sleep_for(std::chrono::milliseconds(2000));
         return 100;
     });
