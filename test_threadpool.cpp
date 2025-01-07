@@ -7,10 +7,14 @@
 
 using namespace std::chrono;
 
-int main()
+static bool thread_pool_init_func = []()
 {
     InitializeThreadPool(4);
+    return true;
+}();
 
+int main()
+{
     for (int i = 0; i < 8; i++)
     {
         GetThreadPool()->enqueue(0, [i](int val) {
