@@ -11,12 +11,12 @@ int main()
 {
     InitializeThreadPool(4);
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 8; i++)
     {
         GetThreadPool()->enqueue(0, [i](int val) {
-            std::cout << i << " start" << std::endl;
-            std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-            std::cout << i << " end" << std::endl;
+            std::cout << val << " start" << std::endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            std::cout << val << " end" << std::endl;
         }, i);
     }
 
@@ -26,14 +26,13 @@ int main()
         std::promise<int> pr;
         std::future<int> fu = pr.get_future();
         GetThreadPool()->enqueue(0, [i](std::promise<int>& pr) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(222));
+            std::this_thread::sleep_for(std::chrono::milliseconds(200));
             pr.set_value(i);
         }, std::ref(pr));
 
         future_vector.push_back(fu.get());
     }
 
-    std::cout << "Wait a second for future collect data" << std::endl;
     std::cout << "Future vector: ";
     for (int val : future_vector)
     {
