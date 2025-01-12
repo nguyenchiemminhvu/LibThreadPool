@@ -1,7 +1,7 @@
 /**
- * ThreadPool.h
+ * threadpool.h
  *
- * Copyright © [nguyenchiemminhvu] [2025]. All Rights Reserved.
+ * Copyright © [nguyenchiemminhvu] [2026]. All Rights Reserved.
  *
  * Licensed under the MIT License. You may obtain a copy of the License at:
  * https://opensource.org/licenses/MIT
@@ -45,7 +45,7 @@
  * [nguyenchiemminhvu@gmail.com]
  *
  * Version:
- * 1.0 - [20250107]
+ * 1.0 - [2026-02-02]
  */
 
 #ifndef THREAD_POOL_H
